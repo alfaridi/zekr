@@ -124,7 +124,9 @@ processResources {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
 
-// Force X11 backend for SWT GTK compatibility on Wayland systems
+// Force X11 backend for SWT GTK compatibility and disable GPU/GBM/DMA-BUF acceleration to avoid rendering issues on Linux
 tasks.named('run') {
     environment 'GDK_BACKEND', 'x11'
+    environment 'WEBKIT_DISABLE_DMABUF_RENDERER', '1'
+    environment 'WEBKIT_DISABLE_COMPOSITING_MODE', '1'
 }
